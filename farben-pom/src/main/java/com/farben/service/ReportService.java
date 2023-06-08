@@ -175,13 +175,6 @@ public class ReportService {
         return rsp;
     }
 
-
-    public JSONObject queryReporMap () {
-        List<Map<String,Object>> stringObjectMap = reportMapper.queryReportMap();
-        return null;
-    }
-
-
     public void export(HttpServletResponse response,Map<String, Object> reqMap) {
         //定义导出的的表头，以及每个表头字段对应的对象变量名
 //        List<Object> head = Arrays.asList("序号", "项目编号", "项目名称","客户名称","客户行业","合同编号");
