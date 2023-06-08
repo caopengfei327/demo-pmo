@@ -1,0 +1,1045 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.farben.mapper.ReportMapper">
+
+
+    <insert id="addReportInfoList" parameterType="java.util.List">
+        insert into WIDE_REPORT_TABLE(
+        ID,PROJECT_NO,PROJECT_NAME,CUST_NAME,CUST_INDUSTRY,CONTRACT_NO,CONTRACT_STATUS,
+        CONTRACT_SIGNING_TIME,CONTRACT_AMOUNT,INVOICE_TYPE,TAX_RATE,CONTRACT_PAYMENT_TERMS,
+        PROJECT_NATURE,SALES_DEPARTMENT,DELIVERY_SECONDARY_DEPARTMENT,DELIVERY_THIRDLEVEL_DEPARTMENT,
+        THIRDLEVEL_DEPARTMENT,PIC,PROJECT_DELIVERY_LOCATION,PROJECT_MANAGER,RESPONSIBLE_SALES,
+        RESPONSIBLE_PRE_SALES,PROJECT_START_TIME,ESTIMATED_PROJECT_ENDTIME,PROJECT_ACCEPTANCE_STATUS,
+        PROJECT_STATUS,ESTIMATE_TOTALCOST,ESTIMATE_LABORCOSTS,ESTIMATE_PROJECTCOST,ESTIMATE_TOTALWORKINGHOURS,ESTIMATE_HAIRLOSS,
+        ESTIMATE_GROSSSALESRATE,BUDGET_LABORCOSTS,BUDGET_REMAINING_COSTS,BUDGET_PROJECTCOST,BUDGET_TOTALCOST,
+        BUDGET_TOTALWORKINGHOURS,BUDGET_HAIRLOSS,BUDGET_GROSSSALESRATE,BUDGET_CHANGE_LABORCOSTS,BUDGET_CHANGE_PROJECTCOST,
+        BUDGET_CHANGE_TOTALWORKINGHOURS,LATEST_BUDGET_LABORCOSTS,LATEST_BUDGET_PROJECTCOST,LATEST_BUDGET_TOTALCOST,
+        LATEST_BUDGET_TOTALWORKINGHOURS,LATEST_BUDGET_HAIRLOSS,LATEST_BUDGET_GROSSSALESRATE,ACTUAL_TOTAL_COST,
+        ACTUAL_LABORCOSTS,ACTUAL_PROJECTCOST,ACTUAL_TOTALWORKINGHOURS,BUDGET_COST_CONSUMPTIONPROGRESS,BUDGET_MANPOWERCOST_CONSUMPTIONPROGRESS,
+        BUDGET_WORKCONSUMPTION_PROGRESS,LABORCOSTS_VS_WORKINGHOURS,REMAINING_BUDGET_TOTALCOST,REMAINING_BUDGET_LABORCOSTS,
+        REMAINING_BUDGET_PROJECTCOST,REMAINING_BUDGET_WORKINGHOURS,NUMBER_OFMILESTONES_TOBEACCEPTED,NUMBER_OFACCEPTED_MILESTONES,
+        ACCEPTANCE_DATE,ACCEPTANCE_INCOME,ACCEPTANCE_PROGRESS,RECEIVED_AMOUNT,RECEIVED_AMOUNT_PROGRESS,EXPECTED_COMPLETION_TIMEREQUIRED,
+        ESTIMATED_LABORCOST_UNITPRICE,EXPECTED_COMPLETION_LABORCOSTS,EXPECTED_COMPLETION_PROJECTCOST,EXPECTED_HAIRLOSS,EXPECTED_GROSSSALESRATE,
+        REMARKS
+        )
+        values
+        <foreach collection="list" item="item" index= "index" separator =",">
+            (
+            #{item.id},
+            #{item.projectNo},
+            #{item.projectName},
+            #{item.custName},
+            #{item.custIndustry},
+            #{item.contractNo},
+            #{item.contStatus},
+            #{item.contSignTime},
+            #{item.contAmount},
+            #{item.invoiceType},
+            #{item.taxRate},
+            #{item.contPayTerms},
+            #{item.projectNature},
+            #{item.salesDepartment},
+            #{item.delSecDepartment},
+            #{item.delThirdDepartment},
+            #{item.thirdDepartment},
+            #{item.pic},
+            #{item.proDelLocation},
+            #{item.projectManager},
+            #{item.resSales},
+            #{item.resPreSales},
+            #{item.proStartTime},
+            #{item.estProEndTime},
+            #{item.proAccStatus},
+            #{item.proStatus},
+            #{item.estTotalCost},
+            #{item.estLaborCosts},
+            #{item.estProCost},
+            #{item.estTotalHours},
+            #{item.estHairLos},
+            #{item.estGroRate},
+            #{item.budLaborCosts},
+            #{item.budRemainCosts},
+            #{item.budProCost},
+            #{item.budTotalCost},
+            #{item.budTotalWorkHours},
+            #{item.budHairLoss},
+            #{item.budGroSaleRate},
+            #{item.budChangeLabCosts},
+            #{item.budChangeProCost},
+            #{item.budChangeWorkHours},
+            #{item.latestLaborCosts},
+            #{item.latestProCost},
+            #{item.latestTotalCost},
+            #{item.latestWorkHours},
+            #{item.latestHairLoss},
+            #{item.latestSaleRate},
+            #{item.actTotalCost},
+            #{item.actLaborCosts},
+            #{item.actProCost},
+            #{item.actWorkHours},
+            #{item.budCostConsRes},
+            #{item.budManCostGress},
+            #{item.budWorkProgress},
+            #{item.labVsWorkHours},
+            #{item.remBudTotalCost},
+            #{item.remBudLaborCosts},
+            #{item.remBudProCost},
+            #{item.remBudWorkHours},
+            #{item.numTobAccepted},
+            #{item.numMilestones},
+            #{item.acceptanceDate},
+            #{item.acceptanceIncome},
+            #{item.acceptanceProgress},
+            #{item.receivedAmount},
+            #{item.recAmountProgress},
+            #{item.expComTime},
+            #{item.estLaborPrice},
+            #{item.expComLabCosts},
+            #{item.expComProCost},
+            #{item.expHairLoss},
+            #{item.expGroRate},
+            #{item.remarks}
+            )
+        </foreach>
+    </insert>
+
+    <update id="updateReportInfoList" parameterType="java.util.List">
+        <foreach collection="list" item="item" open="" close="" separator=";"  index="index">
+            update WIDE_REPORT_TABLE
+            <set>
+                <if test="item.projectNo!=null">
+                    PROJECT_NO=#{item.projectNo},
+                </if>
+                <if test="item.projectName!=null">
+                    PROJECT_NAME=#{item.projectName},
+                </if>
+                <if test="item.custName!=null">
+                    CUST_NAME=#{item.custName},
+                </if>
+                <if test="item.custIndustry!=null">
+                    CUST_INDUSTRY=#{item.custIndustry},
+                </if>
+                <if test="item.contractNo!=null">
+                    CONTRACT_NO=#{item.contractNo},
+                </if>
+                <if test="item.contStatus!=null">
+                    CONTRACT_STATUS=#{item.contStatus},
+                </if>
+                <if test="item.contSignTime!=null">
+                    CONTRACT_SIGNING_TIME=#{item.contSignTime},
+                </if>
+                <if test="item.contAmount!=null">
+                    CONTRACT_AMOUNT=#{item.contAmount},
+                </if>
+                <if test="item.invoiceType!=null">
+                    INVOICE_TYPE=#{item.invoiceType},
+                </if>
+                <if test="item.taxRate!=null">
+                    TAX_RATE=#{item.taxRate},
+                </if>
+                <if test="item.contPayTerms!=null">
+                    CONTRACT_PAYMENT_TERMS=#{item.contPayTerms},
+                </if>
+                <if test="item.projectNature!=null">
+                    PROJECT_NATURE=#{item.projectNature},
+                </if>
+                <if test="item.salesDepartment!=null">
+                    SALES_DEPARTMENT=#{item.salesDepartment},
+                </if>
+                <if test="item.delSecDepartment!=null">
+                    DELIVERY_SECONDARY_DEPARTMENT=#{item.delSecDepartment},
+                </if>
+                <if test="item.delThirdDepartment!=null">
+                    DELIVERY_THIRDLEVEL_DEPARTMENT=#{item.delThirdDepartment},
+                </if>
+                <if test="item.thirdDepartment!=null">
+                    THIRDLEVEL_DEPARTMENT=#{item.thirdDepartment},
+                </if>
+                <if test="item.pic!=null">
+                    PIC=#{item.pic},
+                </if>
+                <if test="item.proDelLocation!=null">
+                    PROJECT_DELIVERY_LOCATION=#{item.proDelLocation},
+                </if>
+                <if test="item.projectManager!=null">
+                    PROJECT_MANAGER=#{item.projectManager},
+                </if>
+                <if test="item.resSales!=null">
+                    RESPONSIBLE_SALES=#{item.resSales},
+                </if>
+                <if test="item.resPreSales!=null">
+                    RESPONSIBLE_PRE_SALES=#{item.resPreSales},
+                </if>
+                <if test="item.proStartTime!=null">
+                    PROJECT_START_TIME=#{item.proStartTime},
+                </if>
+                <if test="item.estProEndTime!=null">
+                    ESTIMATED_PROJECT_ENDTIME=#{item.estProEndTime},
+                </if>
+                <if test="item.proAccStatus!=null">
+                    PROJECT_ACCEPTANCE_STATUS=#{item.proAccStatus},
+                </if>
+                <if test="item.proStatus!=null">
+                    PROJECT_STATUS=#{item.proStatus},
+                </if>
+                <if test="item.estTotalCost!=null">
+                    ESTIMATE_TOTALCOST=#{item.estTotalCost},
+                </if>
+                <if test="item.estLaborCosts!=null">
+                    ESTIMATE_LABORCOSTS=#{item.estLaborCosts},
+                </if>
+                <if test="item.estProCost!=null">
+                    ESTIMATE_PROJECTCOST=#{item.estProCost},
+                </if>
+                <if test="item.estTotalHours!=null">
+                    ESTIMATE_TOTALWORKINGHOURS=#{item.estTotalHours},
+                </if>
+                <if test="item.estHairLos!=null">
+                    ESTIMATE_HAIRLOSS=#{item.estHairLos},
+                </if>
+                <if test="item.estGroRate!=null">
+                    ESTIMATE_GROSSSALESRATE=#{item.estGroRate},
+                </if>
+                <if test="item.budLaborCosts!=null">
+                    BUDGET_LABORCOSTS=#{item.budLaborCosts},
+                </if>
+                <if test="item.budRemainCosts!=null">
+                    BUDGET_REMAINING_COSTS=#{item.budRemainCosts},
+                </if>
+                <if test="item.budProCost!=null">
+                    BUDGET_PROJECTCOST=#{item.budProCost},
+                </if>
+                <if test="item.budTotalCost!=null">
+                    BUDGET_TOTALCOST=#{item.budTotalCost},
+                </if>
+                <if test="item.budTotalWorkHours!=null">
+                    BUDGET_TOTALWORKINGHOURS=#{item.budTotalWorkHours},
+                </if>
+                <if test="item.budHairLoss!=null">
+                    BUDGET_HAIRLOSS=#{item.budHairLoss},
+                </if>
+                <if test="item.budGroSaleRate!=null">
+                    BUDGET_GROSSSALESRATE=#{item.budGroSaleRate},
+                </if>
+                <if test="item.budChangeLabCosts!=null">
+                    BUDGET_CHANGE_LABORCOSTS=#{item.budChangeLabCosts},
+                </if>
+                <if test="item.budChangeProCost!=null">
+                    BUDGET_CHANGE_PROJECTCOST=#{item.budChangeProCost},
+                </if>
+                <if test="item.budChangeWorkHours!=null">
+                    BUDGET_CHANGE_TOTALWORKINGHOURS=#{item.budChangeWorkHours},
+                </if>
+                <if test="item.latestLaborCosts!=null">
+                    LATEST_BUDGET_LABORCOSTS=#{item.latestLaborCosts},
+                </if>
+                <if test="item.latestProCost!=null">
+                    LATEST_BUDGET_PROJECTCOST=#{item.latestProCost},
+                </if>
+                <if test="item.latestTotalCost!=null">
+                    LATEST_BUDGET_TOTALCOST=#{item.latestTotalCost},
+                </if>
+                <if test="item.latestWorkHours!=null">
+                    LATEST_BUDGET_TOTALWORKINGHOURS=#{item.latestWorkHours},
+                </if>
+                <if test="item.latestHairLoss!=null">
+                    LATEST_BUDGET_HAIRLOSS=#{item.latestHairLoss},
+                </if>
+                <if test="item.latestSaleRate!=null">
+                    LATEST_BUDGET_GROSSSALESRATE=#{item.latestSaleRate},
+                </if>
+                <if test="item.actTotalCost!=null">
+                    ACTUAL_TOTAL_COST=#{item.actTotalCost},
+                </if>
+                <if test="item.actLaborCosts!=null">
+                    ACTUAL_LABORCOSTS=#{item.actLaborCosts},
+                </if>
+                <if test="item.actProCost!=null">
+                    ACTUAL_PROJECTCOST=#{item.actProCost},
+                </if>
+                <if test="item.actWorkHours!=null">
+                    ACTUAL_TOTALWORKINGHOURS=#{item.actWorkHours},
+                </if>
+                <if test="item.budCostConsRes!=null">
+                    BUDGET_COST_CONSUMPTIONPROGRESS=#{item.budCostConsRes},
+                </if>
+                <if test="item.budManCostGress!=null">
+                    BUDGET_MANPOWERCOST_CONSUMPTIONPROGRESS=#{item.budManCostGress},
+                </if>
+                <if test="item.budWorkProgress!=null">
+                    BUDGET_WORKCONSUMPTION_PROGRESS=#{item.budWorkProgress},
+                </if>
+                <if test="item.labVsWorkHours!=null">
+                    LABORCOSTS_VS_WORKINGHOURS=#{item.labVsWorkHours},
+                </if>
+                <if test="item.remBudTotalCost!=null">
+                    REMAINING_BUDGET_TOTALCOST=#{item.remBudTotalCost},
+                </if>
+                <if test="item.remBudLaborCosts!=null">
+                    REMAINING_BUDGET_LABORCOSTS=#{item.remBudLaborCosts},
+                </if>
+                <if test="item.remBudProCost!=null">
+                    REMAINING_BUDGET_PROJECTCOST=#{item.remBudProCost},
+                </if>
+                <if test="item.remBudWorkHours!=null">
+                    REMAINING_BUDGET_WORKINGHOURS=#{item.remBudWorkHours},
+                </if>
+                <if test="item.numTobAccepted!=null">
+                    NUMBER_OFMILESTONES_TOBEACCEPTED=#{item.numTobAccepted},
+                </if>
+                <if test="item.numMilestones!=null">
+                    NUMBER_OFACCEPTED_MILESTONES=#{item.numMilestones},
+                </if>
+                <if test="item.acceptanceDate!=null">
+                    ACCEPTANCE_DATE=#{item.acceptanceDate},
+                </if>
+                <if test="item.acceptanceIncome!=null">
+                    ACCEPTANCE_INCOME=#{item.acceptanceIncome},
+                </if>
+                <if test="item.acceptanceProgress!=null">
+                    ACCEPTANCE_PROGRESS=#{item.acceptanceProgress},
+                </if>
+                <if test="item.receivedAmount!=null">
+                    RECEIVED_AMOUNT=#{item.receivedAmount},
+                </if>
+                <if test="item.recAmountProgress!=null">
+                    RECEIVED_AMOUNT_PROGRESS=#{item.recAmountProgress},
+                </if>
+                <if test="item.expComTime!=null">
+                    EXPECTED_COMPLETION_TIMEREQUIRED=#{item.expComTime},
+                </if>
+                <if test="item.estLaborPrice!=null">
+                    ESTIMATED_LABORCOST_UNITPRICE=#{item.estLaborPrice},
+                </if>
+                <if test="item.expComLabCosts!=null">
+                    EXPECTED_COMPLETION_LABORCOSTS=#{item.expComLabCosts},
+                </if>
+                <if test="item.expComProCost!=null">
+                    EXPECTED_COMPLETION_PROJECTCOST=#{item.expComProCost},
+                </if>
+                <if test="item.expHairLoss!=null">
+                    EXPECTED_HAIRLOSS=#{item.expHairLoss},
+                </if>
+                <if test="item.expGroRate!=null">
+                    EXPECTED_GROSSSALESRATE=#{item.expGroRate},
+                </if>
+                <if test="item.remarks!=null">
+                    REMARKS=#{item.remarks}
+                </if>
+            </set>
+            <where>
+                id=#{item.id}
+            </where>
+        </foreach>
+    </update>
+
+
+
+    <select id="reportCount" resultType="int">
+        select count(1) from WIDE_REPORT_TABLE where ID = #{id};
+    </select>
+
+    <select id="queryReportList" resultType="ReportBean" parameterType="Map">
+        select ID,
+        case when #{accountLevel} = '1' then PROJECT_NO
+                when #{accountLevel} = '2' then PROJECT_NO
+                when #{accountLevel} = '3' then PROJECT_NO
+        end as projectNo,
+        PROJECT_NAME projectName,
+        CUST_NAME custName,
+        CUST_INDUSTRY custIndustry,
+        CONTRACT_NO contractNo,
+        CONTRACT_STATUS contStatus,
+        CONTRACT_SIGNING_TIME contSignTime,
+        CONTRACT_AMOUNT contAmount,
+        INVOICE_TYPE invoiceType,
+        TAX_RATE taxRate,
+        CONTRACT_PAYMENT_TERMS contPayTerms,
+        PROJECT_NATURE projectNature,
+        SALES_DEPARTMENT salesDepartment,
+        DELIVERY_SECONDARY_DEPARTMENT delSecDepartment,
+        DELIVERY_THIRDLEVEL_DEPARTMENT delThirdDepartment,
+        THIRDLEVEL_DEPARTMENT thirdDepartment,
+        PIC pic,
+        PROJECT_DELIVERY_LOCATION proDelLocation,
+        PROJECT_MANAGER projectManager,
+        RESPONSIBLE_SALES resSales,
+        RESPONSIBLE_PRE_SALES resPreSales,
+        PROJECT_START_TIME proStartTime,
+        ESTIMATED_PROJECT_ENDTIME estProEndTime,
+        PROJECT_ACCEPTANCE_STATUS proAccStatus,
+        PROJECT_STATUS proStatus,
+        ESTIMATE_TOTALCOST estTotalCost,
+        ESTIMATE_LABORCOSTS estLaborCosts,
+        ESTIMATE_PROJECTCOST estProCost,
+        ESTIMATE_TOTALWORKINGHOURS estTotalHours,
+        ESTIMATE_HAIRLOSS estHairLos,
+        ESTIMATE_GROSSSALESRATE estGroRate,
+        BUDGET_LABORCOSTS budLaborCosts,
+        BUDGET_REMAINING_COSTS budRemainCosts,
+        BUDGET_PROJECTCOST budProCost,
+        BUDGET_TOTALCOST budTotalCost,
+        BUDGET_TOTALWORKINGHOURS budTotalWorkHours,
+        BUDGET_HAIRLOSS budHairLoss,
+        BUDGET_GROSSSALESRATE budGroSaleRate,
+        BUDGET_CHANGE_LABORCOSTS budChangeLabCosts,
+        BUDGET_CHANGE_PROJECTCOST budChangeProCost,
+        BUDGET_CHANGE_TOTALWORKINGHOURS budChangeWorkHours,
+        LATEST_BUDGET_LABORCOSTS latestLaborCosts,
+        LATEST_BUDGET_PROJECTCOST latestProCost,
+        LATEST_BUDGET_TOTALCOST latestTotalCost,
+        LATEST_BUDGET_TOTALWORKINGHOURS latestWorkHours,
+        LATEST_BUDGET_HAIRLOSS latestHairLoss,
+        LATEST_BUDGET_GROSSSALESRATE latestSaleRate,
+        ACTUAL_TOTAL_COST actTotalCost,
+        ACTUAL_LABORCOSTS actLaborCosts,
+        ACTUAL_PROJECTCOST actProCost,
+        ACTUAL_TOTALWORKINGHOURS actWorkHours,
+        BUDGET_COST_CONSUMPTIONPROGRESS budCostConsRes,
+        BUDGET_MANPOWERCOST_CONSUMPTIONPROGRESS budManCostGress,
+        BUDGET_WORKCONSUMPTION_PROGRESS budWorkProgress,
+        LABORCOSTS_VS_WORKINGHOURS labVsWorkHours,
+        REMAINING_BUDGET_TOTALCOST remBudTotalCost,
+        REMAINING_BUDGET_LABORCOSTS remBudLaborCosts,
+        REMAINING_BUDGET_PROJECTCOST remBudProCost,
+        REMAINING_BUDGET_WORKINGHOURS remBudWorkHours,
+        NUMBER_OFMILESTONES_TOBEACCEPTED numTobAccepted,
+        NUMBER_OFACCEPTED_MILESTONES numMilestones,
+        ACCEPTANCE_DATE acceptanceDate,
+        ACCEPTANCE_INCOME acceptanceIncome,
+        ACCEPTANCE_PROGRESS acceptanceProgress,
+        RECEIVED_AMOUNT receivedAmount,
+        RECEIVED_AMOUNT_PROGRESS recAmountProgress,
+        EXPECTED_COMPLETION_TIMEREQUIRED expComTime,
+        ESTIMATED_LABORCOST_UNITPRICE estLaborPrice,
+        EXPECTED_COMPLETION_LABORCOSTS expComLabCosts,
+
+        EXPECTED_COMPLETION_PROJECTCOST expComProCost,
+        EXPECTED_HAIRLOSS expHairLoss,
+        EXPECTED_GROSSSALESRATE expGroRate,
+        REMARKS remarks
+        from WIDE_REPORT_TABLE
+        <where>
+            <if test="null != id">
+                AND id = #{id}
+            </if>
+
+            <if test="null != projectName">
+                AND PROJECT_NAME = #{projectName}
+            </if>
+
+            <if test="null != contractAmount">
+                AND CONTRACT_AMOUNT = #{contractAmount}
+            </if>
+            <if test="null != salesDepartment">
+                AND SALES_DEPARTMENT = #{salesDepartment}
+            </if>
+
+            <if test="null != delSecDepartment">
+                AND DELIVERY_SECONDARY_DEPARTMENT = #{delSecDepartment}
+            </if>
+
+            <if test="null != delThirdDepartment">
+                AND DELIVERY_THIRDLEVEL_DEPARTMENT = #{delThirdDepartment}
+            </if>
+
+            <if test="null != custName">
+                AND CUST_NAME = #{custName}
+            </if>
+
+            <if test="null != contSignTime">
+                AND CONTRACT_SIGNING_TIME = #{contSignTime}
+            </if>
+
+            <if test="null != proAccStatus">
+                AND PROJECT_ACCEPTANCE_STATUS = #{proAccStatus}
+            </if>
+
+            <if test="null != proStatus">
+                AND PROJECT_STATUS = #{proStatus}
+            </if>
+
+
+        </where>
+        order by ID
+        <if test="null != start and null != pageSize">
+            limit #{start},#{pageSize}
+        </if>
+    </select>
+
+    <select id="queryReportCount" resultType="int" parameterType="java.util.HashMap">
+        select count(1) from WIDE_REPORT_TABLE
+        <where>
+            <if test="null != id">
+                AND id = #{id}
+            </if>
+
+            <if test="null != projectName">
+                AND PROJECT_NAME = #{projectName}
+            </if>
+
+            <if test="null != projectNo">
+                AND PROJECT_NO = #{projectNo}
+            </if>
+
+            <if test="null != contractAmount">
+                AND CONTRACT_AMOUNT = #{contractAmount}
+            </if>
+
+            <if test="null != salesDepartment">
+                AND SALES_DEPARTMENT = #{salesDepartment}
+            </if>
+
+            <if test="null != delSecDepartment">
+                AND DELIVERY_SECONDARY_DEPARTMENT = #{delSecDepartment}
+            </if>
+
+            <if test="null != delThirdDepartment">
+                AND DELIVERY_THIRDLEVEL_DEPARTMENT = #{delThirdDepartment}
+            </if>
+        </where>
+    </select>
+
+
+    <select id="queryReportMap" resultType="java.util.HashMap">
+        select column_name,COLUMN_COMMENT from information_schema.COLUMNS where table_name='WIDE_REPORT_TABLE' and TABLE_SCHEMA='mysql';
+    </select>
+
+
+    <insert id="insertReportInfo" parameterType="ReportBean" useGeneratedKeys="true" keyProperty="id">
+        insert into WIDE_REPORT_TABLE(ID,
+                                      PROJECT_NO, PROJECT_NAME, CUST_NAME, CUST_INDUSTRY, CONTRACT_NO, CONTRACT_STATUS,
+                                      CONTRACT_SIGNING_TIME, CONTRACT_AMOUNT, INVOICE_TYPE, TAX_RATE,
+                                      CONTRACT_PAYMENT_TERMS,
+                                      PROJECT_NATURE, SALES_DEPARTMENT, DELIVERY_SECONDARY_DEPARTMENT,
+                                      DELIVERY_THIRDLEVEL_DEPARTMENT,
+                                      THIRDLEVEL_DEPARTMENT, PIC, PROJECT_DELIVERY_LOCATION, PROJECT_MANAGER,
+                                      RESPONSIBLE_SALES,
+                                      RESPONSIBLE_PRE_SALES, PROJECT_START_TIME, ESTIMATED_PROJECT_ENDTIME,
+                                      PROJECT_ACCEPTANCE_STATUS,
+                                      PROJECT_STATUS, ESTIMATE_TOTALCOST, ESTIMATE_LABORCOSTS, ESTIMATE_PROJECTCOST,
+                                      ESTIMATE_TOTALWORKINGHOURS, ESTIMATE_HAIRLOSS,
+                                      ESTIMATE_GROSSSALESRATE, BUDGET_LABORCOSTS, BUDGET_REMAINING_COSTS,
+                                      BUDGET_PROJECTCOST, BUDGET_TOTALCOST,
+                                      BUDGET_TOTALWORKINGHOURS, BUDGET_HAIRLOSS, BUDGET_GROSSSALESRATE,
+                                      BUDGET_CHANGE_LABORCOSTS, BUDGET_CHANGE_PROJECTCOST,
+                                      BUDGET_CHANGE_TOTALWORKINGHOURS, LATEST_BUDGET_LABORCOSTS,
+                                      LATEST_BUDGET_PROJECTCOST, LATEST_BUDGET_TOTALCOST,
+                                      LATEST_BUDGET_TOTALWORKINGHOURS, LATEST_BUDGET_HAIRLOSS,
+                                      LATEST_BUDGET_GROSSSALESRATE, ACTUAL_TOTAL_COST,
+                                      ACTUAL_LABORCOSTS, ACTUAL_PROJECTCOST, ACTUAL_TOTALWORKINGHOURS,
+                                      BUDGET_COST_CONSUMPTIONPROGRESS, BUDGET_MANPOWERCOST_CONSUMPTIONPROGRESS,
+                                      BUDGET_WORKCONSUMPTION_PROGRESS, LABORCOSTS_VS_WORKINGHOURS,
+                                      REMAINING_BUDGET_TOTALCOST, REMAINING_BUDGET_LABORCOSTS,
+                                      REMAINING_BUDGET_PROJECTCOST, REMAINING_BUDGET_WORKINGHOURS,
+                                      NUMBER_OFMILESTONES_TOBEACCEPTED, NUMBER_OFACCEPTED_MILESTONES,
+                                      ACCEPTANCE_DATE, ACCEPTANCE_INCOME, ACCEPTANCE_PROGRESS, RECEIVED_AMOUNT,
+                                      RECEIVED_AMOUNT_PROGRESS, EXPECTED_COMPLETION_TIMEREQUIRED,
+                                      ESTIMATED_LABORCOST_UNITPRICE, EXPECTED_COMPLETION_LABORCOSTS,
+                                      EXPECTED_COMPLETION_PROJECTCOST, EXPECTED_HAIRLOSS, EXPECTED_GROSSSALESRATE,REMARKS)
+        values (#{id},
+                #{projectNo},
+                #{projectName},
+                #{custName},
+                #{custIndustry},
+                #{contractNo},
+                #{contStatus},
+                #{contSignTime},
+                #{contAmount},
+                #{invoiceType},
+                #{taxRate},
+                #{contPayTerms},
+                #{projectNature},
+                #{salesDepartment},
+                #{delSecDepartment},
+                #{delThirdDepartment},
+                #{thirdDepartment},
+                #{pic},
+                #{proDelLocation},
+                #{projectManager},
+                #{resSales},
+                #{resPreSales},
+                #{proStartTime},
+                #{estProEndTime},
+                #{proAccStatus},
+                #{proStatus},
+                #{estTotalCost},
+                #{estLaborCosts},
+                #{estProCost},
+                #{estTotalHours},
+                #{estHairLos},
+                #{estGroRate},
+                #{budLaborCosts},
+                #{budRemainCosts},
+                #{budProCost},
+                #{budTotalCost},
+                #{budTotalWorkHours},
+                #{budHairLoss},
+                #{budGroSaleRate},
+                #{budChangeLabCosts},
+                #{budChangeProCost},
+                #{budChangeWorkHours},
+                #{latestLaborCosts},
+                #{latestProCost},
+                #{latestTotalCost},
+                #{latestWorkHours},
+                #{latestHairLoss},
+                #{latestSaleRate},
+                #{actTotalCost},
+                #{actLaborCosts},
+                #{actProCost},
+                #{actWorkHours},
+                #{budCostConsRes},
+                #{budManCostGress},
+                #{budWorkProgress},
+                #{labVsWorkHours},
+                #{remBudTotalCost},
+                #{remBudLaborCosts},
+                #{remBudProCost},
+                #{remBudWorkHours},
+                #{numTobAccepted},
+                #{numMilestones},
+                #{acceptanceDate},
+                #{acceptanceIncome},
+                #{acceptanceProgress},
+                #{receivedAmount},
+                #{recAmountProgress},
+                #{expComTime},
+                #{estLaborPrice},
+                #{expComLabCosts},
+                #{expComProCost},
+                #{expHairLoss},
+                #{expGroRate},
+                #{remarks})
+    </insert>
+
+
+    <update id="updateReportInfo" parameterType="Map">
+        update WIDE_REPORT_TABLE
+        <set>
+            <if test="projectNo!=null">
+                PROJECT_NO=#{projectNo},
+            </if>
+            <if test="projectName!=null">
+                PROJECT_NAME=#{projectName},
+            </if>
+            <if test="custName!=null">
+                CUST_NAME=#{custName},
+            </if>
+            <if test="custIndustry!=null">
+                CUST_INDUSTRY=#{custIndustry},
+            </if>
+            <if test="contractNo!=null">
+                CONTRACT_NO=#{contractNo},
+            </if>
+            <if test="contStatus!=null">
+                CONTRACT_STATUS=#{contStatus},
+            </if>
+            <if test="contSignTime!=null">
+                CONTRACT_SIGNING_TIME=#{contSignTime},
+            </if>
+            <if test="contAmount!=null">
+                CONTRACT_AMOUNT=#{contAmount},
+            </if>
+            <if test="invoiceType!=null">
+                INVOICE_TYPE=#{invoiceType},
+            </if>
+            <if test="taxRate!=null">
+                TAX_RATE=#{taxRate},
+            </if>
+            <if test="contPayTerms!=null">
+                CONTRACT_PAYMENT_TERMS=#{contPayTerms},
+            </if>
+            <if test="projectNature!=null">
+                PROJECT_NATURE=#{projectNature},
+            </if>
+            <if test="salesDepartment!=null">
+                SALES_DEPARTMENT=#{salesDepartment},
+            </if>
+            <if test="delSecDepartment!=null">
+                DELIVERY_SECONDARY_DEPARTMENT=#{delSecDepartment},
+            </if>
+            <if test="delThirdDepartment!=null">
+                DELIVERY_THIRDLEVEL_DEPARTMENT=#{delThirdDepartment},
+            </if>
+            <if test="thirdDepartment!=null">
+                THIRDLEVEL_DEPARTMENT=#{thirdDepartment},
+            </if>
+            <if test="pic!=null">
+                PIC=#{pic},
+            </if>
+            <if test="proDelLocation!=null">
+                PROJECT_DELIVERY_LOCATION=#{proDelLocation},
+            </if>
+            <if test="projectManager!=null">
+                PROJECT_MANAGER=#{projectManager},
+            </if>
+            <if test="resSales!=null">
+                RESPONSIBLE_SALES=#{resSales},
+            </if>
+            <if test="resPreSales!=null">
+                RESPONSIBLE_PRE_SALES=#{resPreSales},
+            </if>
+            <if test="proStartTime!=null">
+                PROJECT_START_TIME=#{proStartTime},
+            </if>
+            <if test="estProEndTime!=null">
+                ESTIMATED_PROJECT_ENDTIME=#{estProEndTime},
+            </if>
+            <if test="proAccStatus!=null">
+                PROJECT_ACCEPTANCE_STATUS=#{proAccStatus},
+            </if>
+            <if test="proStatus!=null">
+                PROJECT_STATUS=#{proStatus},
+            </if>
+            <if test="estTotalCost!=null">
+                ESTIMATE_TOTALCOST=#{estTotalCost},
+            </if>
+            <if test="estLaborCosts!=null">
+                ESTIMATE_LABORCOSTS=#{estLaborCosts},
+            </if>
+            <if test="estProCost!=null">
+                ESTIMATE_PROJECTCOST=#{estProCost},
+            </if>
+            <if test="estTotalHours!=null">
+                ESTIMATE_TOTALWORKINGHOURS=#{estTotalHours},
+            </if>
+            <if test="estHairLos!=null">
+                ESTIMATE_HAIRLOSS=#{estHairLos},
+            </if>
+            <if test="estGroRate!=null">
+                ESTIMATE_GROSSSALESRATE=#{estGroRate},
+            </if>
+            <if test="budLaborCosts!=null">
+                BUDGET_LABORCOSTS=#{budLaborCosts},
+            </if>
+            <if test="budRemainCosts!=null">
+                BUDGET_REMAINING_COSTS=#{budRemainCosts},
+            </if>
+            <if test="budProCost!=null">
+                BUDGET_PROJECTCOST=#{budProCost},
+            </if>
+            <if test="budTotalCost!=null">
+                BUDGET_TOTALCOST=#{budTotalCost},
+            </if>
+            <if test="budTotalWorkHours!=null">
+                BUDGET_TOTALWORKINGHOURS=#{budTotalWorkHours},
+            </if>
+            <if test="budHairLoss!=null">
+                BUDGET_HAIRLOSS=#{budHairLoss},
+            </if>
+            <if test="budGroSaleRate!=null">
+                BUDGET_GROSSSALESRATE=#{budGroSaleRate},
+            </if>
+            <if test="budChangeLabCosts!=null">
+                BUDGET_CHANGE_LABORCOSTS=#{budChangeLabCosts},
+            </if>
+            <if test="budChangeProCost!=null">
+                BUDGET_CHANGE_PROJECTCOST=#{budChangeProCost},
+            </if>
+            <if test="budChangeWorkHours!=null">
+                BUDGET_CHANGE_TOTALWORKINGHOURS=#{budChangeWorkHours},
+            </if>
+            <if test="latestLaborCosts!=null">
+                LATEST_BUDGET_LABORCOSTS=#{latestLaborCosts},
+            </if>
+            <if test="latestProCost!=null">
+                LATEST_BUDGET_PROJECTCOST=#{latestProCost},
+            </if>
+            <if test="latestTotalCost!=null">
+                LATEST_BUDGET_TOTALCOST=#{latestTotalCost},
+            </if>
+            <if test="latestWorkHours!=null">
+                LATEST_BUDGET_TOTALWORKINGHOURS=#{latestWorkHours},
+            </if>
+            <if test="latestHairLoss!=null">
+                LATEST_BUDGET_HAIRLOSS=#{latestHairLoss},
+            </if>
+            <if test="latestSaleRate!=null">
+                LATEST_BUDGET_GROSSSALESRATE=#{latestSaleRate},
+            </if>
+            <if test="actTotalCost!=null">
+                ACTUAL_TOTAL_COST=#{actTotalCost},
+            </if>
+            <if test="actLaborCosts!=null">
+                ACTUAL_LABORCOSTS=#{actLaborCosts},
+            </if>
+            <if test="actProCost!=null">
+                ACTUAL_PROJECTCOST=#{actProCost},
+            </if>
+            <if test="actWorkHours!=null">
+                ACTUAL_TOTALWORKINGHOURS=#{actWorkHours},
+            </if>
+            <if test="budCostConsRes!=null">
+                BUDGET_COST_CONSUMPTIONPROGRESS=#{budCostConsRes},
+            </if>
+            <if test="budManCostGress!=null">
+                BUDGET_MANPOWERCOST_CONSUMPTIONPROGRESS=#{budManCostGress},
+            </if>
+            <if test="budWorkProgress!=null">
+                BUDGET_WORKCONSUMPTION_PROGRESS=#{budWorkProgress},
+            </if>
+            <if test="labVsWorkHours!=null">
+                LABORCOSTS_VS_WORKINGHOURS=#{labVsWorkHours},
+            </if>
+            <if test="remBudTotalCost!=null">
+                REMAINING_BUDGET_TOTALCOST=#{remBudTotalCost},
+            </if>
+            <if test="remBudLaborCosts!=null">
+                REMAINING_BUDGET_LABORCOSTS=#{remBudLaborCosts},
+            </if>
+            <if test="remBudProCost!=null">
+                REMAINING_BUDGET_PROJECTCOST=#{remBudProCost},
+            </if>
+            <if test="remBudWorkHours!=null">
+                REMAINING_BUDGET_WORKINGHOURS=#{remBudWorkHours},
+            </if>
+            <if test="numTobAccepted!=null">
+                NUMBER_OFMILESTONES_TOBEACCEPTED=#{numTobAccepted},
+            </if>
+            <if test="numMilestones!=null">
+                NUMBER_OFACCEPTED_MILESTONES=#{numMilestones},
+            </if>
+            <if test="acceptanceDate!=null">
+                ACCEPTANCE_DATE=#{acceptanceDate},
+            </if>
+            <if test="acceptanceIncome!=null">
+                ACCEPTANCE_INCOME=#{acceptanceIncome},
+            </if>
+            <if test="acceptanceProgress!=null">
+                ACCEPTANCE_PROGRESS=#{acceptanceProgress},
+            </if>
+            <if test="receivedAmount!=null">
+                RECEIVED_AMOUNT=#{receivedAmount},
+            </if>
+            <if test="recAmountProgress!=null">
+                RECEIVED_AMOUNT_PROGRESS=#{recAmountProgress},
+            </if>
+            <if test="expComTime!=null">
+                EXPECTED_COMPLETION_TIMEREQUIRED=#{expComTime},
+            </if>
+            <if test="estLaborPrice!=null">
+                ESTIMATED_LABORCOST_UNITPRICE=#{estLaborPrice},
+            </if>
+            <if test="expComLabCosts!=null">
+                EXPECTED_COMPLETION_LABORCOSTS=#{expComLabCosts},
+            </if>
+            <if test="expComProCost!=null">
+                EXPECTED_COMPLETION_PROJECTCOST=#{expComProCost},
+            </if>
+            <if test="expHairLoss!=null">
+                EXPECTED_HAIRLOSS=#{expHairLoss},
+            </if>
+            <if test="expGroRate!=null">
+                EXPECTED_GROSSSALESRATE=#{expGroRate}
+            </if>
+            <if test="remarks!=null">
+                REMARKS=#{remarks}
+            </if>
+        </set>
+        <where>
+            id=#{id}
+        </where>
+    </update>
+
+
+
+    <select id="queryReportAndMileList" resultType="java.util.LinkedHashMap" parameterType="Map">
+        select wrt.ID id,
+        wrt.PROJECT_NO projectNo,
+        wrt.PROJECT_NAME projectName,
+        wrt.CONTRACT_NO contractNo,
+        wrt.CUST_NAME custName,
+        wrt.CONTRACT_SIGNING_TIME contSignTime,
+        wrt.SALES_DEPARTMENT salesDepartment,
+        wrt.DELIVERY_SECONDARY_DEPARTMENT delSecDepartment,
+        wrt.DELIVERY_THIRDLEVEL_DEPARTMENT delThirdDepartment,
+        wrt.PROJECT_MANAGER projectManager,
+        wrt.RESPONSIBLE_SALES resSales,
+        wrt.CONTRACT_AMOUNT contAmount,
+        wrt.TAX_RATE taxRate,
+        mit.ACCEP_NODE accepNode,
+        mit.ACCEP_PAY_TERMS accepPayTerms,
+        mit.PAYMENT_RATIO paymentRatio,
+        mit.ACCEPT_RATIO acceptRatio,
+        mit.REC_AMOUNT recAmount,
+        mit.ACTUAL_REPAY_AMOUNT actualRepayAmount,
+        mit.ACCEP_INCOME accepIncome,
+        mit.ACCEP_OR_NOT accepOrNot,
+        mit.BASE_ACCEP_PLAN baseAccepPlan,
+        mit.ACT_ACCEP_TIME actAccepTime,
+        mit.LAT_EXP_ACCEPPLAN latExpAccepplan,
+        mit.LAT_ACCEP_YEAR latAccepYear,
+        mit.LAT_ACCEP_MONTH latAccepMonth,
+        mit.WHE_RECEIVE_PAYMENT wheReceivePayment,
+        mit.REMARKS remarks
+        from WIDE_REPORT_TABLE wrt,MILESTONE_INFORMATION_TABLE mit
+        <where>
+            wrt.PROJECT_NO = mit.PROJECT_NO
+
+            <if test="null != projectName">
+                AND wrt.PROJECT_NAME = #{projectName}
+            </if>
+
+            <if test="null != projectNo">
+                AND wrt.PROJECT_NO = #{projectNo}
+            </if>
+        </where>
+    </select>
+
+
+
+    <select id="exportReport" parameterType="Map" resultType="java.util.LinkedHashMap">
+        select ID,
+        PROJECT_NO projectNo,
+        PROJECT_NAME projectName,
+        CUST_NAME custName,
+        CUST_INDUSTRY custIndustry,
+        CONTRACT_NO contractNo,
+        CONTRACT_STATUS contStatus,
+        CONTRACT_SIGNING_TIME contSignTime,
+        CONTRACT_AMOUNT contAmount,
+        INVOICE_TYPE invoiceType,
+        TAX_RATE taxRate,
+        CONTRACT_PAYMENT_TERMS contPayTerms,
+        PROJECT_NATURE projectNature,
+        SALES_DEPARTMENT salesDepartment,
+        DELIVERY_SECONDARY_DEPARTMENT delSecDepartment,
+        DELIVERY_THIRDLEVEL_DEPARTMENT delThirdDepartment,
+        THIRDLEVEL_DEPARTMENT thirdDepartment,
+        PIC pic,
+        PROJECT_DELIVERY_LOCATION proDelLocation,
+        PROJECT_MANAGER projectManager,
+        RESPONSIBLE_SALES resSales,
+        RESPONSIBLE_PRE_SALES resPreSales,
+        PROJECT_START_TIME proStartTime,
+        ESTIMATED_PROJECT_ENDTIME estProEndTime,
+        PROJECT_ACCEPTANCE_STATUS proAccStatus,
+        PROJECT_STATUS proStatus,
+        ESTIMATE_TOTALCOST estTotalCost,
+        ESTIMATE_LABORCOSTS estLaborCosts,
+        ESTIMATE_PROJECTCOST estProCost,
+        ESTIMATE_TOTALWORKINGHOURS estTotalHours,
+        ESTIMATE_HAIRLOSS estHairLos,
+        ESTIMATE_GROSSSALESRATE estGroRate,
+        BUDGET_LABORCOSTS budLaborCosts,
+        BUDGET_REMAINING_COSTS budRemainCosts,
+        BUDGET_PROJECTCOST budProCost,
+        BUDGET_TOTALCOST budTotalCost,
+        BUDGET_TOTALWORKINGHOURS budTotalWorkHours,
+        BUDGET_HAIRLOSS budHairLoss,
+        BUDGET_GROSSSALESRATE budGroSaleRate,
+        BUDGET_CHANGE_LABORCOSTS budChangeLabCosts,
+        BUDGET_CHANGE_PROJECTCOST budChangeProCost,
+        BUDGET_CHANGE_TOTALWORKINGHOURS budChangeWorkHours,
+        LATEST_BUDGET_LABORCOSTS latestLaborCosts,
+        LATEST_BUDGET_PROJECTCOST latestProCost,
+        LATEST_BUDGET_TOTALCOST latestTotalCost,
+        LATEST_BUDGET_TOTALWORKINGHOURS latestWorkHours,
+        LATEST_BUDGET_HAIRLOSS latestHairLoss,
+        LATEST_BUDGET_GROSSSALESRATE latestSaleRate,
+        ACTUAL_TOTAL_COST actTotalCost,
+        ACTUAL_LABORCOSTS actLaborCosts,
+        ACTUAL_PROJECTCOST actProCost,
+        ACTUAL_TOTALWORKINGHOURS actWorkHours,
+        BUDGET_COST_CONSUMPTIONPROGRESS budCostConsRes,
+        BUDGET_MANPOWERCOST_CONSUMPTIONPROGRESS budManCostGress,
+        BUDGET_WORKCONSUMPTION_PROGRESS budWorkProgress,
+        LABORCOSTS_VS_WORKINGHOURS labVsWorkHours,
+        REMAINING_BUDGET_TOTALCOST remBudTotalCost,
+        REMAINING_BUDGET_LABORCOSTS remBudLaborCosts,
+        REMAINING_BUDGET_PROJECTCOST remBudProCost,
+        REMAINING_BUDGET_WORKINGHOURS remBudWorkHours,
+        NUMBER_OFMILESTONES_TOBEACCEPTED numTobAccepted,
+        NUMBER_OFACCEPTED_MILESTONES numMilestones,
+        ACCEPTANCE_DATE acceptanceDate,
+        ACCEPTANCE_INCOME acceptanceIncome,
+        ACCEPTANCE_PROGRESS acceptanceProgress,
+        RECEIVED_AMOUNT receivedAmount,
+        RECEIVED_AMOUNT_PROGRESS recAmountProgress,
+        EXPECTED_COMPLETION_TIMEREQUIRED expComTime,
+        ESTIMATED_LABORCOST_UNITPRICE estLaborPrice,
+        EXPECTED_COMPLETION_LABORCOSTS expComLabCosts,
+        EXPECTED_COMPLETION_PROJECTCOST expComProCost,
+        EXPECTED_HAIRLOSS expHairLoss,
+        EXPECTED_GROSSSALESRATE expGroRate,
+        REMARKS remarks
+        from WIDE_REPORT_TABLE
+        <where>
+            <if test="null != projectName">
+                AND PROJECT_NAME = #{projectName}
+            </if>
+
+            <if test="null != projectNo">
+                AND PROJECT_NO = #{projectNo}
+            </if>
+        </where>
+        <if test="null != start and null != pageSize">
+            order by ID limit ${start},${pageSize}
+        </if>
+    </select>
+
+
+    <select id="queryReportTempList" resultType="java.util.HashMap" parameterType="Map">
+        select wrt.ID id,
+        wrt.PROJECT_NO projectNo,
+        wrt.PROJECT_NAME projectName,
+        wrt.CONTRACT_NO contractNo,
+        wrt.CUST_NAME custName,
+        wrt.CONTRACT_SIGNING_TIME contSignTime,
+        wrt.SALES_DEPARTMENT salesDepartment,
+        wrt.DELIVERY_SECONDARY_DEPARTMENT delSecDepartment,
+        wrt.DELIVERY_THIRDLEVEL_DEPARTMENT delThirdDepartment,
+        wrt.PROJECT_MANAGER projectManager,
+        wrt.RESPONSIBLE_SALES resSales,
+        wrt.CONTRACT_AMOUNT contAmount,
+        wrt.TAX_RATE taxRate
+        from WIDE_REPORT_TABLE wrt
+        <where>
+
+            <if test="null != projectName">
+                wrt.PROJECT_NAME = #{projectName}
+            </if>
+
+            <if test="null != projectNo">
+                AND wrt.PROJECT_NO = #{projectNo}
+            </if>
+
+            <if test="null != salesDepartment">
+                AND wrt.SALES_DEPARTMENT = #{salesDepartment}
+            </if>
+
+            <if test="null != delSecDepartment">
+                AND wrt.DELIVERY_SECONDARY_DEPARTMENT = #{delSecDepartment}
+            </if>
+
+            <if test="null != delThirdDepartment">
+                AND wrt.DELIVERY_THIRDLEVEL_DEPARTMENT = #{delThirdDepartment}
+            </if>
+        </where>
+        <if test="null != start and null != pageSize">
+        order by ID limit #{start},#{pageSize}
+        </if>
+    </select>
+
+<!--    <resultMap id="BaseResultMap" type="java.util.HashMap">-->
+<!--        <id column="id" property="id" />-->
+<!--        <result column="projectNo" property="projectNo" />-->
+<!--        <result column="projectName" property="projectName" />-->
+<!--        <result column="custName" property="custName" />-->
+<!--    </resultMap>-->
+
+
+<!--    <delete id="deleteReportInfo" parameterType="java.lang.String">-->
+<!--        delete from WIDE_REPORT_TABLE where id in-->
+<!--        <foreach collection="array" item="id" open="(" separator="," close=")">-->
+<!--            #{id}-->
+<!--        </foreach>-->
+<!--    </delete>-->
+
+    <delete id="deleteReport" parameterType="java.util.Map">
+        delete from WIDE_REPORT_TABLE where id in (${fileIds})
+    </delete>
+
+</mapper>

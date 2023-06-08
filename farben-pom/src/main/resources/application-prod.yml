@@ -1,0 +1,40 @@
+server:
+  error:
+    include-exception: true
+    include-message: always
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ENC(AkwWMaxn5pV8HwY0VyWfGA==)
+    password: ENC(VypmxNchViRNZO5ChtiW6/LH2D9OJvNq)
+    url: jdbc:mysql://192.168.1.92:3306/widedb?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false&allowMultiQueries=true
+
+  thymeleaf:
+    prefix: classpath:/templates/
+mybatis:
+  type-aliases-package: com.farben.entity
+  mapper-locations: classpath:mapper/mysql/*.xml
+  configuration:
+    call-setters-on-nulls: true
+
+
+#logging:
+#  level:
+#    root: info
+#    com.farben: info
+#  file:
+#    name: /opt/backend/wide/log/wide-log.log
+
+logging:
+  file:
+    path: /opt/backend/wide/logs
+  config: classpath:logback-spring.xml
+
+
+jasypt:
+  encryptor:
+    password: qwert12345
+    algorithm: PBEWithMD5AndDES
+
+
+

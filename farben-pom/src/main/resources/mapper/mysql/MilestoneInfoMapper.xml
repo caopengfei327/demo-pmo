@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.farben.mapper.MilestoneMapper">
+
+
+    <insert id="addMilestoneInfo" parameterType="java.util.List">
+        insert into MILESTONE_INFORMATION_TABLE(
+        ID,PROJECT_NO,ACCEP_NODE,ACCEP_PAY_TERMS,PAYMENT_RATIO,ACCEPT_RATIO,REC_AMOUNT,
+        ACTUAL_REPAY_AMOUNT,ACCEP_INCOME,ACCEP_OR_NOT,
+        BASE_ACCEP_PLAN,ACT_ACCEP_TIME,LAT_EXP_ACCEPPLAN,
+        LAT_ACCEP_YEAR,LAT_ACCEP_MONTH,WHE_RECEIVE_PAYMENT,REMARKS
+        )
+        values
+        <foreach collection="list" item="item" index= "index" separator =",">
+            (
+            #{item.id},
+            #{item.projectNo},
+            #{item.accepNode},
+            #{item.accepPayTerms},
+            #{item.paymentRatio},
+            #{item.acceptRatio},
+            #{item.recAmount},
+            #{item.actualRepayAmount},
+            #{item.accepIncome},
+            #{item.accepOrNot},
+            #{item.baseAccepPlan},
+            #{item.actAccepTime},
+            #{item.latExpAccepplan},
+            #{item.latAccepYear},
+            #{item.latAccepMonth},
+            #{item.wheReceivePayment},
+            #{item.remarks}
+            )
+        </foreach>
+    </insert>
+
+    <update id="updateMilestoneInfoList" parameterType="java.util.List">
+        <foreach collection="list" item="item" open="" close="" separator=";"  index="index">
+            update MILESTONE_INFORMATION_TABLE
+            <set>
+                <if test="item.projectNo!=null">
+                    PROJECT_NO=#{item.projectNo},
+                </if>
+                <if test="item.accepNode!=null">
+                    ACCEP_NODE=#{item.accepNode},
+                </if>
+                <if test="item.accepPayTerms!=null">
+                    ACCEP_PAY_TERMS=#{item.accepPayTerms},
+                </if>
+                <if test="item.paymentRatio!=null">
+                    PAYMENT_RATIO=#{item.paymentRatio},
+                </if>
+                <if test="item.acceptRatio!=null">
+                    ACCEPT_RATIO=#{item.acceptRatio},
+                </if>
+                <if test="item.recAmount!=null">
+                    REC_AMOUNT=#{item.recAmount},
+                </if>
+                <if test="item.actualRepayAmount!=null">
+                    ACTUAL_REPAY_AMOUNT=#{item.actualRepayAmount},
+                </if>
+                <if test="item.accepIncome!=null">
+                    ACCEP_INCOME=#{item.accepIncome},
+                </if>
+                <if test="item.accepOrNot!=null">
+                    ACCEP_OR_NOT=#{item.accepOrNot},
+                </if>
+                <if test="item.baseAccepPlan!=null">
+                    BASE_ACCEP_PLAN=#{item.baseAccepPlan},
+                </if>
+                <if test="item.actAccepTime!=null">
+                    ACT_ACCEP_TIME=#{item.actAccepTime},
+                </if>
+
+                <if test="item.latExpAccepplan!=null">
+                    LAT_EXP_ACCEPPLAN=#{item.latExpAccepplan},
+                </if>
+                <if test="item.latAccepYear!=null">
+                    LAT_ACCEP_YEAR=#{item.latAccepYear},
+                </if>
+                <if test="item.latAccepMonth!=null">
+                    LAT_ACCEP_MONTH=#{item.latAccepMonth},
+                </if>
+                <if test="item.wheReceivePayment!=null">
+                    WHE_RECEIVE_PAYMENT=#{item.wheReceivePayment},
+                </if>
+                <if test="item.remarks!=null">
+                    REMARKS=#{item.remarks}
+                </if>
+            </set>
+            <where>
+                id=#{item.id}
+            </where>
+        </foreach>
+    </update>
+
+
+
+    <select id="milestoneCount" resultType="int">
+        select count(1) from MILESTONE_INFORMATION_TABLE where ID = #{id};
+    </select>
+
+    <select id="queryMilestonetList" resultType="MilestoneInfo" parameterType="Map">
+        select ID,
+        PROJECT_NO projectNo,
+        ACCEP_NODE accepNode,
+        ACCEP_PAY_TERMS accepPayTerms,
+        PAYMENT_RATIO paymentRatio,
+        ACCEPT_RATIO acceptRatio,
+        REC_AMOUNT recAmount,
+        ACTUAL_REPAY_AMOUNT actualRepayAmount,
+        ACCEP_INCOME accepIncome,
+        ACCEP_OR_NOT accepOrNot,
+        BASE_ACCEP_PLAN baseAccepPlan,
+        ACT_ACCEP_TIME actAccepTime,
+        LAT_EXP_ACCEPPLAN latExpAccepplan,
+        LAT_ACCEP_YEAR latAccepYear,
+        LAT_ACCEP_MONTH latAccepMonth,
+        WHE_RECEIVE_PAYMENT wheReceivePayment,
+        REMARKS remarks
+        from MILESTONE_INFORMATION_TABLE
+        <where>
+            <if test="null != id">
+                AND id = #{id}
+            </if>
+
+            <if test="null != projectName">
+                AND PROJECT_NAME = #{projectName}
+            </if>
+
+            <if test="null != contractAmount">
+                AND CONTRACT_AMOUNT = #{contractAmount}
+            </if>
+            <if test="null != salesDepartment">
+                AND SALES_DEPARTMENT = #{salesDepartment}
+            </if>
+        </where>
+        order by ID limit #{start},#{pageSize}
+    </select>
+
+    <select id="queryMilestoneCount" resultType="int" parameterType="Map">
+        select count(1) from MILESTONE_INFORMATION_TABLE
+        <where>
+            <if test="null != id">
+                AND id = #{id}
+            </if>
+
+            <if test="null != projectName">
+                AND PROJECT_NAME = #{projectName}
+            </if>
+
+            <if test="null != contractAmount">
+                AND CONTRACT_AMOUNT = #{contractAmount}
+            </if>
+
+            <if test="null != salesDepartment">
+                AND SALES_DEPARTMENT = #{salesDepartment}
+            </if>
+        </where>
+    </select>
+
+
+    <select id="queryReportMap" resultType="java.util.HashMap">
+        select column_name,COLUMN_COMMENT from information_schema.COLUMNS where table_name='MILESTONE_INFORMATION_TABLE' and TABLE_SCHEMA='mysql';
+    </select>
+
+
+    <insert id="insertMilestoneInfo" parameterType="MilestoneInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into MILESTONE_INFORMATION_TABLE(
+            ID,PROJECT_NO,ACCEP_NODE,ACCEP_PAY_TERMS,PAYMENT_RATIO,ACCEPT_RATIO,REC_AMOUNT,ACTUAL_REPAY_AMOUNT,ACCEP_INCOME,
+            ACCEP_OR_NOT,BASE_ACCEP_PLAN,ACT_ACCEP_TIME,LAT_EXP_ACCEPPLAN,LAT_ACCEP_YEAR,LAT_ACCEP_MONTH,WHE_RECEIVE_PAYMENT,REMARKS)
+        values (
+                #{id},
+                #{projectNo},
+                #{accepNode},
+                #{accepPayTerms},
+                #{paymentRatio},
+                #{acceptRatio},
+                #{recAmount},
+                #{actualRepayAmount},
+                #{accepIncome},
+                #{accepOrNot},
+                #{baseAccepPlan},
+                #{actAccepTime},
+                #{latExpAccepplan},
+                #{latAccepYear},
+                #{latAccepMonth},
+                #{wheReceivePayment},
+                #{remarks}
+                )
+    </insert>
+
+    <update id="updateMilestoneInfo" parameterType="Map">
+        update MILESTONE_INFORMATION_TABLE
+        <set>
+            <if test="projectNo!=null">
+                PROJECT_NO=#{projectNo},
+            </if>
+            <if test="accepNode!=null">
+                ACCEP_NODE=#{accepNode},
+            </if>
+            <if test="accepPayTerms!=null">
+                ACCEP_PAY_TERMS=#{accepPayTerms},
+            </if>
+            <if test="paymentRatio!=null">
+                PAYMENT_RATIO=#{paymentRatio},
+            </if>
+            <if test="acceptRatio!=null">
+                ACCEPT_RATIO=#{acceptRatio},
+            </if>
+            <if test="recAmount!=null">
+                REC_AMOUNT=#{recAmount},
+            </if>
+            <if test="actualRepayAmount!=null">
+                ACTUAL_REPAY_AMOUNT=#{actualRepayAmount},
+            </if>
+            <if test="accepIncome!=null">
+                ACCEP_INCOME=#{accepIncome},
+            </if>
+            <if test="accepOrNot!=null">
+                ACCEP_OR_NOT=#{accepOrNot},
+            </if>
+            <if test="baseAccepPlan!=null">
+                BASE_ACCEP_PLAN=#{baseAccepPlan},
+            </if>
+            <if test="actAccepTime!=null">
+                ACT_ACCEP_TIME=#{actAccepTime},
+            </if>
+            <if test="latExpAccepplan!=null">
+                LAT_EXP_ACCEPPLAN=#{latExpAccepplan},
+            </if>
+            <if test="latAccepYear!=null">
+                LAT_ACCEP_YEAR=#{latAccepYear},
+            </if>
+            <if test="latAccepMonth!=null">
+                LAT_ACCEP_MONTH=#{latAccepMonth},
+            </if>
+            <if test="wheReceivePayment!=null">
+                WHE_RECEIVE_PAYMENT=#{wheReceivePayment},
+            </if>
+            <if test="remarks!=null">
+                REMARKS=#{remarks}
+            </if>
+        </set>
+        <where>
+            id=#{id}
+        </where>
+    </update>
+
+
+    <select id="queryMileList" resultType="java.util.HashMap" parameterType="Map">
+        select
+        mit.id as id,
+        mit.PROJECT_NO projectNo,
+        mit.ACCEP_NODE accepNode,
+        mit.ACCEP_PAY_TERMS accepPayTerms,
+        mit.PAYMENT_RATIO paymentRatio,
+        mit.ACCEPT_RATIO acceptRatio,
+        mit.REC_AMOUNT recAmount,
+        mit.ACTUAL_REPAY_AMOUNT actualRepayAmount,
+        mit.ACCEP_INCOME accepIncome,
+        mit.ACCEP_OR_NOT accepOrNot,
+        mit.BASE_ACCEP_PLAN baseAccepPlan,
+        mit.ACT_ACCEP_TIME actAccepTime,
+        mit.LAT_EXP_ACCEPPLAN latExpAccepplan,
+        mit.LAT_ACCEP_YEAR latAccepYear,
+        mit.LAT_ACCEP_MONTH latAccepMonth,
+        mit.WHE_RECEIVE_PAYMENT wheReceivePayment,
+        mit.REMARKS remarks
+        from MILESTONE_INFORMATION_TABLE mit
+        <where>
+            <if test="null != projectNo">
+                mit.PROJECT_NO = #{projectNo}
+            </if>
+        </where>
+    </select>
+
+    <select id="exportMilestoneInfo" parameterType="Map" resultType="java.util.LinkedHashMap">
+        select ID,PROJECT_NO,ACCEP_NODE,ACCEP_PAY_TERMS,PAYMENT_RATIO,ACCEPT_RATIO,REC_AMOUNT,ACTUAL_REPAY_AMOUNT,ACCEP_INCOME,
+        ACCEP_OR_NOT,BASE_ACCEP_PLAN,ACT_ACCEP_TIME,LAT_EXP_ACCEPPLAN,LAT_ACCEP_YEAR,LAT_ACCEP_MONTH,WHE_RECEIVE_PAYMENT,REMARKS
+        from MILESTONE_INFORMATION_TABLE
+        <where>
+            <if test="null != projectNo">
+                AND PROJECT_NO = #{projectNo}
+            </if>
+        </where>
+        <if test="null != start and null != pageSize">
+            order by ID limit ${start},${pageSize}
+        </if>
+    </select>
+
+    <delete id="deleteMilestone" parameterType="java.util.Map">
+        delete from MILESTONE_INFORMATION_TABLE where id in (${fileIds})
+    </delete>
+</mapper>

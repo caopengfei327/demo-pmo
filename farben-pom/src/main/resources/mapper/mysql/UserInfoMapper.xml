@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.farben.mapper.UserMapper">
+
+
+    <!-- 根据渠道号查询配置信息 -->
+    <select id="getInfo" parameterType="String" resultType="com.farben.entity.UserInfo">
+        select ID,USERNAME,ACCOUNT_LEVEL as ACCOUNTLEVEL,DEPARTMENT
+        from USER_INFO
+        where username = #{name,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+    </select>
+
+</mapper>
